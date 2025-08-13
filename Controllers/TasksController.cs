@@ -22,6 +22,25 @@ namespace Task_Manager_API.Controllers
             return Ok(tasks);
         }
 
+        [HttpGet("search")]
+        public async Task<ActionResult<List<TaskItem>>> Search([FromQuery] string title)
+        {
+            if (string.IsNullOrWhiteSpace(title))
+                return BadRequest("Title cannot be empty");
+
+            var tasks = await _taskService.SearchTasksByTitleAsync(title);
+            return Ok(tasks);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<TaskItem>> GetById(int id)
+        {
+            var task = await _taskService.GetTaskByIdAsync(id);
+            if (task == null)
+                return NotFound($"Task with ID {id} not found.");
+
+            return Ok(task);
+        }
 
         public class CreateTaskDto
         {

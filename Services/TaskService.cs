@@ -11,8 +11,6 @@ namespace Task_Manager_API.Services
 {
     public class TaskService
     {
-//        private readonly List<TaskItem> _tasks = new();
-  //      private int _nextId = 1;
         private readonly AppDbContext _context;
 
         public TaskService(AppDbContext context)
@@ -54,7 +52,18 @@ namespace Task_Manager_API.Services
             await _context.SaveChangesAsync();
             return true;
         }
+        public async Task<List<TaskItem>> SearchTasksByTitleAsync(string title)
+        {
+            return await _context.Tasks
+                                 .Where(t => t.Title.Contains(title))
+                                 .ToListAsync();
+        }
+        public async Task<TaskItem?> GetTaskByIdAsync(int id)
+        {
+            return await _context.Tasks.FindAsync(id);
+        }
 
-        //public TaskService() { }
+        public TaskService() { }
+
     }
 }
