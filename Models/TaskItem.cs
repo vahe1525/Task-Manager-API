@@ -11,6 +11,7 @@ namespace Task_Manager_API.Models
         public int Id {  get; set; } = default(int);
         public string Title { get; set; } = "-";
         public StatusItem Status { get; set; } = StatusItem.NotStarted;
+
         public string Description { get; set; } = "-";
 
         public DateTime Created { get; set; }

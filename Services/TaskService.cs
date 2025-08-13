@@ -11,6 +11,8 @@ namespace Task_Manager_API.Services
 {
     public class TaskService
     {
+//        private readonly List<TaskItem> _tasks = new();
+  //      private int _nextId = 1;
         private readonly AppDbContext _context;
 
         public TaskService(AppDbContext context)
@@ -41,6 +43,7 @@ namespace Task_Manager_API.Services
 
             return true;
         }
+
         public async Task<bool> DeleteTaskAsync(int id)
         {
             var task = await _context.Tasks.FindAsync(id);
@@ -51,5 +54,7 @@ namespace Task_Manager_API.Services
             await _context.SaveChangesAsync();
             return true;
         }
+
+        //public TaskService() { }
     }
 }
