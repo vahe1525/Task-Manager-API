@@ -27,6 +27,8 @@ namespace Task_Manager_API.Models
         {
             return $"{Id} -- {Title} -- {Description} -- {Status}";
         }
+
+        public TaskItem() { }
     }
 
 }
