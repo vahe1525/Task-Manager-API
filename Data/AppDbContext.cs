@@ -11,5 +11,18 @@ namespace Task_Manager_API.Data
         }
 
         public DbSet<TaskItem> Tasks { get; set; }
+        public DbSet<User> Users { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<TaskItem>()
+                .HasOne<User>()                   
+                .WithMany()                    
+                .HasForeignKey(t => t.UserId)   
+                .OnDelete(DeleteBehavior.Cascade);
+
+            base.OnModelCreating(modelBuilder);
+        }
+
     }
 }

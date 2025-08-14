@@ -15,7 +15,11 @@ namespace Task_Manager_API.Models
         public string Description { get; set; } = "-";
 
         public DateTime Created { get; set; }
-       public DateTime DeadLine { get; set; } 
+        public DateTime DeadLine { get; set; }
+
+        // Foreign keys 
+        public int UserId { get; set; }
+
 
         public TaskItem(string title,int seconds) 
         {
