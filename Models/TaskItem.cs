@@ -18,14 +18,15 @@ namespace Task_Manager_API.Models
         public DateTime DeadLine { get; set; }
 
         // Foreign keys 
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
 
 
-        public TaskItem(string title,int seconds) 
+        public TaskItem(string title,int seconds, Guid userId) 
         {
             DeadLine = DateTime.UtcNow.AddSeconds(seconds);
             Created = DateTime.UtcNow;
             Title = title;
+            UserId = userId;
         }
         public override string ToString()
         {

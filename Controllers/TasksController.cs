@@ -44,6 +44,7 @@ namespace Task_Manager_API.Controllers
 
         public class CreateTaskDto
         {
+            public User user { get; set; }
             public string Title { get; set; }
             public int Seconds { get; set; }
         }
@@ -51,7 +52,7 @@ namespace Task_Manager_API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddTask([FromBody] CreateTaskDto request)
         {
-            await _taskService.AddTaskAsync(request.Title,request.Seconds);
+            await _taskService.AddTaskAsync(request.Title,request.Seconds, request.user.Id);
             return Ok();
         }
 

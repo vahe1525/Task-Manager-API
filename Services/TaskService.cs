@@ -22,9 +22,9 @@ namespace Task_Manager_API.Services
         {
             return await _context.Tasks.ToListAsync();
         }
-        public async Task<TaskItem> AddTaskAsync(string title,int seconds)
+        public async Task<TaskItem> AddTaskAsync(string title,int seconds, Guid userId)
         {
-            TaskItem task = new(title,seconds);
+            TaskItem task = new(title,seconds, userId);
             
             _context.Tasks.Add(task);
             await _context.SaveChangesAsync();
