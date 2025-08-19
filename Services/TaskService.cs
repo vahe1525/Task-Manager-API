@@ -63,7 +63,5 @@ namespace Task_Manager_API.Services
             return await _context.Tasks.FindAsync(id);
         }
 
-        public TaskService() { }
-
     }
 }

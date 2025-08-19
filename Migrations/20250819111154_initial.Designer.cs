@@ -12,8 +12,8 @@ using Task_Manager_API.Data;
 namespace Task_Manager_API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250814134021_ConfiguredTables")]
-    partial class ConfiguredTables
+    [Migration("20250819111154_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,8 +50,8 @@ namespace Task_Manager_API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -62,11 +62,13 @@ namespace Task_Manager_API.Migrations
 
             modelBuilder.Entity("Task_Manager_API.Models.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
@@ -83,11 +85,18 @@ namespace Task_Manager_API.Migrations
 
             modelBuilder.Entity("Task_Manager_API.Models.TaskItem", b =>
                 {
-                    b.HasOne("Task_Manager_API.Models.User", null)
-                        .WithMany()
+                    b.HasOne("Task_Manager_API.Models.User", "User")
+                        .WithMany("Tasks")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Task_Manager_API.Models.User", b =>
+                {
+                    b.Navigation("Tasks");
                 });
 #pragma warning restore 612, 618
         }

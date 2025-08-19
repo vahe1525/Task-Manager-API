@@ -63,6 +63,10 @@ namespace Task_Manager_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -78,11 +82,18 @@ namespace Task_Manager_API.Migrations
 
             modelBuilder.Entity("Task_Manager_API.Models.TaskItem", b =>
                 {
-                    b.HasOne("Task_Manager_API.Models.User", null)
-                        .WithMany()
+                    b.HasOne("Task_Manager_API.Models.User", "User")
+                        .WithMany("Tasks")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Task_Manager_API.Models.User", b =>
+                {
+                    b.Navigation("Tasks");
                 });
 #pragma warning restore 612, 618
         }

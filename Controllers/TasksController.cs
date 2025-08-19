@@ -45,7 +45,7 @@ namespace Task_Manager_API.Controllers
         public class CreateTaskDto
         {
             public User user { get; set; }
-            public string Title { get; set; }
+            public string Title { get; set; } = "";
             public int Seconds { get; set; }
         }
 

@@ -28,6 +28,9 @@ namespace Task_Manager_API
             //builder.Services.AddSingleton<TaskService>();
             builder.Services.AddScoped<TaskService>();
 
+            builder.Services.AddScoped<UserService>();
+
+
 
             var app = builder.Build();
 

@@ -16,13 +16,12 @@ namespace Task_Manager_API.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<TaskItem>()
-                .HasOne<User>()                   
-                .WithMany()                    
-                .HasForeignKey(t => t.UserId)   
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasOne(t => t.User)
+                .WithMany(u => u.Tasks)
+                .HasForeignKey(t => t.UserId)
+                .OnDelete(DeleteBehavior.Cascade); // or Restrict / SetNull
 
             base.OnModelCreating(modelBuilder);
         }
-
     }
 }

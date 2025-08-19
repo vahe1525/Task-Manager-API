@@ -19,6 +19,7 @@ namespace Task_Manager_API.Models
 
         // Foreign keys 
         public Guid UserId { get; set; }
+        public User User { get; set; }     // Navigation
 
 
         public TaskItem(string title,int seconds, Guid userId) 
