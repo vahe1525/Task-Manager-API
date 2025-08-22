@@ -39,6 +39,17 @@ namespace Task_Manager_API.Services
 
             return true; 
         }
+        public async Task<List<User>> GetAllUsersAsync()
+        {
+            return await _context.Users
+                .Select(u => new User
+                {
+                    Id = u.Id,
+                    Username = u.Username,
+                    Email = u.Email
+                })
+                .ToListAsync();
+        }
 
     }
 }

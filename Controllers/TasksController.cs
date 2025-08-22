@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Task_Manager_API.Services;
 using Task_Manager_API.Models;
+using Task_Manager_API.Models.DTO;
 
 namespace Task_Manager_API.Controllers
 {
@@ -40,13 +41,6 @@ namespace Task_Manager_API.Controllers
                 return NotFound($"Task with ID {id} not found.");
 
             return Ok(task);
-        }
-
-        public class CreateTaskDto
-        {
-            public User user { get; set; }
-            public string Title { get; set; } = "";
-            public int Seconds { get; set; }
         }
 
         [HttpPost]
